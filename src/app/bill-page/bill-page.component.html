@@ -1,0 +1,39 @@
+<table class="w-75 mx-auto">
+    <thead>
+        <tr>
+            <th class="text-center" colspan="10">New Look<br>&lt;address&gt;</th>
+        </tr>
+        <tr>
+            <th colspan="2" rowspan="2">GSTIN:</th>
+            <td colspan="3" rowspan="2">&lt;gstno&gt;</td>
+            <th colspan="2">Date:</th>
+            <td colspan="3">{{today}}</td>
+        </tr>
+        <tr>
+            <th colspan="2">Invoice No:</th>
+            <td colspan="3">&lt;ino&gt;</td>
+        </tr>
+        <tr>
+            <th colspan="1">Sl. No.</th>
+            <th colspan="3">Partition</th>
+            <th colspan="1">Quantity</th>
+            <th colspan="2">Rate</th>
+            <th colspan="3"><span class="float-end">Total</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items; let i=index">
+            <td colspan="1">{{i+1}}</td>
+            <td colspan="3">{{item.name}}</td>
+            <td colspan="1">{{item.qty}}</td>
+            <td colspan="2">&#8377;{{item.rate|showPrice}}</td>
+            <td colspan="3"><span class="float-end">&#8377;{{item.price|showPrice}}</span></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="7">Grand Total: </th>
+            <th colspan="3"><span class="float-end">&#8377;{{totalAmount|showPrice}}</span></th>
+        </tr>
+    </tfoot>
+</table>

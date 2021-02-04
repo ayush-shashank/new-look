@@ -1,0 +1,12 @@
+table,
+th,
+td {
+  border: solid black 2px;
+  padding: 5px;
+  font-family: monospace;
+}
+
+tbody td {
+  border-top: none;
+  border-bottom: none;
+}

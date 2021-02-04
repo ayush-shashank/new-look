@@ -1,0 +1,131 @@
+/* .remove{
+  position: relative;
+  display: none;
+}
+
+tr:hover .remove{
+  display: block;
+} */
+
+/*  */
+
+h1 {
+  color: #fff;
+  font-size: 64px;
+  letter-spacing: 2px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.content {
+  background: #fff;
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 20px 30px;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 20px;
+  background: #f6f6f6;
+  font-size: 20px;
+  color: #555;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+  /* height: 46px; */
+}
+
+li:nth-child(even) {
+  padding: 20px;
+  background: #f2f2f2;
+}
+
+li span {
+  display: block;
+}
+/* li > div.row > div.col-8.col-sm-12 > div:nth-child(2) > div:nth-child(1) > */
+li > .row .row:nth-child(2) {
+  font-size: 16px;
+  margin-top: 6px;
+  color: #999;
+}
+
+li .remove {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.6);
+  width: 40px;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0 0 0 10px;
+}
+li .remove:hover {
+  color: rgb(255, 255, 255);
+  background: #bb0d0d91;
+  transition: all ease 0.2s;
+}
+form {
+  margin-bottom: 10px;
+}
+form input {
+  float: left;
+  width: 95%;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  margin: 0 1%;
+  padding: 10px;
+  display: block;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+form input:focus {
+  outline: none;
+  border-bottom: 3px solid #233a88;
+  padding-bottom: 8px;
+  transition: all ease 0.2s;
+}
+form input:hover {
+  outline: none;
+  border-bottom: 3px solid #0d75bb91;
+  padding-bottom: 8px;
+  transition: all ease 0.2s;
+}
+.btn-primary:hover {
+  background-color: #0d75bb91;
+}
+.btn-danger:hover {
+  background-color: #bb0d0d91;
+}
+.btn-success:hover {
+  background-color: #75bb0d91;
+}
+
+form:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+button {
+  border:0;
+  background: #fff;
+  border-radius: 10px;
+  padding: 13px;
+  width: 14%;
+  box-shadow: -1px 0px 1px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-family: ubuntu;
+  letter-spacing: 1px;
+  color: #999;
+}

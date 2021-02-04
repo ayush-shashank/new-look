@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <header class="text-center">
+        <h2>Welcome to New Look</h2>
+    </header>
+    <div class="content">
+        <span>Invoice No: </span>
+        <div class="float-end font-monospace">Total: &#8377;{{totalPrice|showPrice}}</div>
+        <div class="mt-3">
+            <form [formGroup]="newItemForm">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <input type="text" formControlName="name" placeholder="Item">
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <input type="number" formControlName="rate" placeholder="Rate">
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <input type="number" formControlName="qty" placeholder="Quantity">
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <button class="btn btn-primary w-100" (click)="addItem()">Add Item</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <ul>
+            <li *ngFor="let item of items; let i=index">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <div class="row">
+                            <span>{{item.name}}</span>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <span>@ &#8377;{{item.rate|showPrice}}</span>
+                            </div>
+                            <div class="col">
+                                <span>X {{item.qty}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 my-auto">
+                        <span>&#8377;{{item.price|showPrice}}</span>
+                    </div>
+                </div>
+                <div class="remove" (click)="removeItem(i)"><span class="material-icons">delete</span></div>
+            </li>
+        </ul>
+    </div>
+    <div class="row gy-3">
+        <div class="col-sm-12 col-md-6">
+            <button class="btn btn-success w-100" (click)="onPrint()">Print</button>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <button class="btn btn-danger w-100" (click)="onReset()">Remove All Items</button>
+        </div>
+    </div>
+
+</div>
