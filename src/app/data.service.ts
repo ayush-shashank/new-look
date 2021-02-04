@@ -12,3 +12,4 @@ export class DataService {
     console.log(db.collection('items'));
   }
 }
+
