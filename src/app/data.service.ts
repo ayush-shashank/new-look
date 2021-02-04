@@ -9,7 +9,8 @@ export class DataService {
   totalAmount = 0;
 
   constructor(private db: AngularFirestore) {
-    console.log(db.collection('items'));
+    db.collection('items')
+      .snapshotChanges()
+      .subscribe((res) => console.log(res));
   }
 }
-
