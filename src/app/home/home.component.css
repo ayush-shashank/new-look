@@ -1,14 +1,3 @@
-/* .remove{
-  position: relative;
-  display: none;
-}
-
-tr:hover .remove{
-  display: block;
-} */
-
-/*  */
-
 h1 {
   color: #fff;
   font-size: 64px;
@@ -31,7 +20,7 @@ ul {
   padding: 0;
 }
 
-li {
+.added li {
   padding: 20px;
   background: #f6f6f6;
   font-size: 20px;
@@ -41,22 +30,22 @@ li {
   /* height: 46px; */
 }
 
-li:nth-child(even) {
+.added li:nth-child(even) {
   padding: 20px;
   background: #f2f2f2;
 }
 
-li span {
+.added li span {
   display: block;
 }
 /* li > div.row > div.col-8.col-sm-12 > div:nth-child(2) > div:nth-child(1) > */
-li > .row .row:nth-child(2) {
+.added li > .row .row:nth-child(2) {
   font-size: 16px;
   margin-top: 6px;
   color: #999;
 }
 
-li .remove {
+.added li .remove {
   position: absolute;
   top: 0;
   right: 0px;
@@ -68,7 +57,7 @@ li .remove {
   cursor: pointer;
   border-radius: 0 0 0 10px;
 }
-li .remove:hover {
+.added li .remove:hover {
   color: rgb(255, 255, 255);
   background: #bb0d0d91;
   transition: all ease 0.2s;
@@ -118,7 +107,7 @@ form:after {
 }
 
 button {
-  border:0;
+  border: 0;
   background: #fff;
   border-radius: 10px;
   padding: 13px;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
@@ -9,39 +9,45 @@ import { DataService } from '../data.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  newItemForm: FormGroup;
+  inventory: any[] = [];
+  name = '';
+  curItem: any;
+  qty = '';
   items: any[] = [];
   totalPrice = 0;
 
-  constructor(
-    private fb: FormBuilder,
-    private ds: DataService,
-    private router: Router
-  ) {
-    this.newItemForm = fb.group({
-      name: ['', [Validators.required]],
-      rate: ['', [Validators.required]],
-      qty: ['', [Validators.required]],
+  constructor(private ds: DataService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.ds.inventory.subscribe((res) => {
+      this.inventory = res;
+      console.log('res', res);
     });
   }
 
-  ngOnInit(): void {
-    // this.ds.getEvents().then((events) => (this.items = events));
-  }
-
   addItem(): void {
-    if (this.newItemForm.valid) {
-      console.log(this.newItemForm.value);
+    this.curItem = this.inventory.filter((item) => item.name == this.name)[0];
+    console.log(this.curItem);
+    let rate;
+    if (this.curItem == undefined) {
+      this.curItem = { name: this.name };
+      rate = prompt(
+        'Item not present in inventory. Enter rate of the item to add it to the list:'
+      );
+      if (rate == undefined) this.curItem = undefined;
+      else this.curItem.rate = +rate;
+    }
+    if (this.curItem != null && +this.qty > 0) {
       const item = {
-        name: this.newItemForm.value.name,
-        rate: +this.newItemForm.value.rate,
-        qty: +this.newItemForm.value.qty,
-        price: this.newItemForm.value.rate * this.newItemForm.value.qty,
+        name: this.curItem.name,
+        rate: +this.curItem.rate,
+        qty: +this.qty,
+        price: this.curItem.rate * +this.qty,
       };
       this.totalPrice += +item.price;
       this.items.unshift(item);
-      this.newItemForm.reset();
     }
+    this.resetForm();
   }
 
   removeItem(index: number): void {
@@ -56,9 +62,15 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['bill']);
   }
 
+  resetForm() {
+    this.name = '';
+    this.qty = '';
+    this.curItem = null;
+  }
+
   onReset(): void {
-    this.newItemForm.reset();
-    this.totalPrice = 0;
+    this.resetForm();
     this.items = [];
+    this.totalPrice = 0;
   }
 }

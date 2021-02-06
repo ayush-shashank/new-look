@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BillPageComponent } from './bill-page/bill-page.component';
 import { ShowPricePipe } from './show-price.pipe';
 
@@ -15,7 +15,7 @@ import { ShowPricePipe } from './show-price.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule
   ],
