@@ -8,7 +8,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  invoiceNo: number = 0;
+  invoiceNo: number = -1;
   inventory: any[] = [];
   name = '';
   curItem: any;
