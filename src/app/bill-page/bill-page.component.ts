@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-bill-page',
@@ -7,17 +8,11 @@ import { DataService } from '../data.service';
   styleUrls: ['./bill-page.component.css'],
 })
 export class BillPageComponent implements OnInit {
-  items: any[];
-  totalAmount = 0;
-  today: string;
+  order: Order;
+  gstin = '';
   constructor(private ds: DataService) {
-    this.items = ds.items.reverse();
-    this.totalAmount = ds.totalAmount;
-    const d = new Date();
-    const date = String(d.getDate()).padStart(2, '0');
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const year = d.getFullYear();
-    this.today = `${date}/${month}/${year}`;
+    this.order = ds.newOrder;
+    this.gstin = ds.gstin;
   }
 
   ngOnInit(): void {

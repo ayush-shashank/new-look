@@ -3,20 +3,20 @@
         <h2>Welcome to New Look</h2>
     </header>
     <div class="content">
-        <span>Invoice No: </span>
+        <span>Invoice No: {{invoiceNo}}</span>
         <div class="float-end font-monospace">Total: &#8377;{{totalPrice|showPrice}}</div>
         <div class="mt-3">
             <form #newItemForm="ngForm" (ngSubmit)="addItem()">
                 <div class="row">
                     <div class="col-sm-12 col-md-8">
-                        <input type="search" placeholder="Selct Item" list="datalistOptions" [(ngModel)]="name"
+                        <input type="search" placeholder="Select Item" list="datalistOptions" [(ngModel)]="name"
                             name="name" autocomplete>
                         <datalist class="dropdown-content" id="datalistOptions">
                             <option *ngFor="let item of inventory" [value]="item.name">
                         </datalist>
                     </div>
                     <div class="col-sm-12 col-md-2">
-                        <input type="number" [(ngModel)]="qty" placeholder="Quantity" name="qty">
+                        <input type="number" [(ngModel)]="quantity" placeholder="Quantity" name="quantity" min="0">
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <button class="btn btn-primary w-100" type="submit">Add Item</button>
@@ -36,7 +36,7 @@
                                 <span>@ &#8377;{{item.rate|showPrice}}</span>
                             </div>
                             <div class="col">
-                                <span>X {{item.qty}}</span>
+                                <span>X {{item.quantity}}</span>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
             </li>
         </ul>
     </div>
-    <div class="row gy-3">
+    <div class="row gy-3 btn-container">
         <div class="col-sm-12 col-md-6">
             <button class="btn btn-success w-100" (click)="onPrint()">Print</button>
         </div>

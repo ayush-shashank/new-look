@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
@@ -9,41 +8,49 @@ import { DataService } from '../data.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  invoiceNo: number = 0;
   inventory: any[] = [];
   name = '';
   curItem: any;
-  qty = '';
+  quantity = '';
   items: any[] = [];
   totalPrice = 0;
 
   constructor(private ds: DataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.ds.inventory.subscribe((res) => {
+    this.ds.inventory.subscribe((res: any) => {
       this.inventory = res;
       console.log('res', res);
     });
+    this.invoiceNo = this.ds.lastInvoice;
   }
 
   addItem(): void {
-    this.curItem = this.inventory.filter((item) => item.name == this.name)[0];
-    console.log(this.curItem);
-    let rate;
-    if (this.curItem == undefined) {
-      this.curItem = { name: this.name };
-      rate = prompt(
+    console.log(this.quantity);
+    this.curItem = this.inventory.filter((item) => item.name === this.name)[0];
+    // console.log(this.curItem);
+    if (!this.curItem) {
+      let rate = prompt(
         'Item not present in inventory. Enter rate of the item to add it to the list:'
       );
-      if (rate == undefined) this.curItem = undefined;
-      else this.curItem.rate = +rate;
+      console.log(rate, +rate!);
+      if (rate) {
+        if (isNaN(+rate)) {
+          alert('Invalid Input');
+        } else {
+          this.curItem = { name: this.name, rate: +rate };
+        }
+      }
     }
-    if (this.curItem != null && +this.qty > 0) {
+    if (this.curItem && +this.quantity > 0) {
       const item = {
         name: this.curItem.name,
-        rate: +this.curItem.rate,
-        qty: +this.qty,
-        price: this.curItem.rate * +this.qty,
+        rate: this.curItem.rate,
+        quantity: +this.quantity,
+        price: this.curItem.rate * +this.quantity,
       };
+      // console.log(item);
       this.totalPrice += +item.price;
       this.items.unshift(item);
     }
@@ -55,16 +62,15 @@ export class HomeComponent implements OnInit {
     this.items.splice(index, 1);
   }
 
-  onPrint(): void {
+  onPrint() {
     console.log(this.items);
-    this.ds.items = this.items;
-    this.ds.totalAmount = this.totalPrice;
+    this.ds.generateBill(this.items, this.totalPrice);
     this.router.navigate(['bill']);
   }
 
-  resetForm() {
+  resetForm(): void {
     this.name = '';
-    this.qty = '';
+    this.quantity = '';
     this.curItem = null;
   }
 
