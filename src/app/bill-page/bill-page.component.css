@@ -10,3 +10,9 @@ tbody td {
   border-top: none;
   border-bottom: none;
 }
+
+@media print {
+  button {
+    display: none !important;
+  }
+}

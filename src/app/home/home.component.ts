@@ -23,7 +23,12 @@ export class HomeComponent implements OnInit {
       this.inventory = res;
       console.log('res', res);
     });
-    this.invoiceNo = this.ds.lastInvoice;
+
+    // this.ds.invoiceObservable.subscribe((data) => {
+    //   console.log('css', data);
+      this.invoiceNo = this.ds.lastInvoice;
+    // });
+    // this.invoiceNo = this.ds.lastInvoice;
   }
 
   addItem(): void {

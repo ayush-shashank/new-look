@@ -18,4 +18,7 @@ export class BillPageComponent implements OnInit {
   ngOnInit(): void {
     // window.print();
   }
+  onPrint():void{
+    window.print()
+  }
 }
