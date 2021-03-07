@@ -48,9 +48,18 @@
             </li>
         </ul>
     </div>
+    <div class="content">
+        <form>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="text" [(ngModel)]="customer" placeholder="Customer Name" name="customer">
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="row gy-3 btn-container">
         <div class="col-sm-12 col-md-6">
-            <button class="btn btn-success w-100" (click)="onPrint()">Save</button>
+            <button class="btn btn-success w-100" (click)="onSave()">Save</button>
         </div>
         <div class="col-sm-12 col-md-6">
             <button class="btn btn-danger w-100" (click)="onReset()">Remove All Items</button>

@@ -1,15 +1,20 @@
 <table class="w-75 mx-auto">
     <thead>
         <tr>
-            <th class="text-center" colspan="10">New Look<br>&lt;address&gt;</th>
+            <th class="text-center" colspan="10">
+                {{store.name}}<br>
+                {{store.address}}
+            </th>
         </tr>
         <tr>
-            <th colspan="2" rowspan="2">GSTIN:</th>
-            <td colspan="3" rowspan="2">{{gstin}}</td>
+            <th colspan="2">Name:</th>
+            <td colspan="3">{{order.customer}}</td>
             <th colspan="2">Date:</th>
             <td colspan="3">{{order.date|date}}</td>
         </tr>
         <tr>
+            <th colspan="2">GSTIN:</th>
+            <td colspan="3">{{store.gstin}}</td>
             <th colspan="2">Invoice No:</th>
             <td colspan="3">{{order.invoiceNo}}</td>
         </tr>

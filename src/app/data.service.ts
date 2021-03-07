@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Order } from './order';
 
@@ -9,9 +8,15 @@ import { Order } from './order';
 })
 export class DataService {
   inventory: any;
-  gstin = '';
+  store = { gstin: '', address: '', name: '' };
   lastInvoice = -1;
-  newOrder: Order = { invoiceNo: -1, date: new Date(), items: [], total: 0 };
+  newOrder: Order = {
+    invoiceNo: -1,
+    customer: '',
+    date: new Date(),
+    items: [],
+    total: 0,
+  };
   inventoryCollection = this.db.collection('items');
   ordersCollection = this.db.collection('orders');
   globalCollection = this.db.collection('global');
@@ -19,7 +24,7 @@ export class DataService {
   constructor(private db: AngularFirestore) {
     this.inventory = this.setInventory();
     this.getLastInvoice();
-    this.getGSTIN();
+    this.getStore();
   }
 
   setInventory(): any {
@@ -44,13 +49,15 @@ export class DataService {
       });
   }
 
-  getGSTIN() {
+  getStore() {
     this.globalCollection
-      .doc('gstin')
+      .doc('store')
       .get()
       .subscribe((doc) => {
         let data: any = doc.data();
-        this.gstin = data.gstin;
+        this.store.gstin = data.gstin;
+        this.store.address = data.address;
+        this.store.name = data.name;
       });
   }
 
@@ -59,6 +66,7 @@ export class DataService {
     console.log('li', this.lastInvoice);
     this.newOrder = {
       invoiceNo: ++this.lastInvoice,
+      customer: this.store.name,
       date: new Date(),
       items: items.reverse(),
       total: totalAmount,

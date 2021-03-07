@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   invoiceNo: number = -1;
   inventory: any[] = [];
   name = '';
+  customer = '';
   curItem: any;
   quantity = '';
   items: any[] = [];
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
 
     // this.ds.invoiceObservable.subscribe((data) => {
     //   console.log('css', data);
-      this.invoiceNo = this.ds.lastInvoice;
+    this.invoiceNo = this.ds.lastInvoice;
     // });
     // this.invoiceNo = this.ds.lastInvoice;
   }
@@ -67,8 +68,9 @@ export class HomeComponent implements OnInit {
     this.items.splice(index, 1);
   }
 
-  onPrint() {
+  onSave() {
     console.log(this.items);
+    console.log('Cust name', this.customer);
     this.ds.generateBill(this.items, this.totalPrice);
     this.router.navigate(['bill']);
   }

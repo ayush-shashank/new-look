@@ -9,16 +9,16 @@ import { Order } from '../order';
 })
 export class BillPageComponent implements OnInit {
   order: Order;
-  gstin = '';
+  store: { name: string; address: string; gstin: string };
   constructor(private ds: DataService) {
     this.order = ds.newOrder;
-    this.gstin = ds.gstin;
+    this.store = ds.store;
   }
 
   ngOnInit(): void {
     // window.print();
   }
-  onPrint():void{
-    window.print()
+  onPrint(): void {
+    window.print();
   }
 }

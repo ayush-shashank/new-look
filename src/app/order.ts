@@ -1,6 +1,7 @@
 export interface Order {
   invoiceNo: number;
+  customer: string;
   date: Date;
-  total: number;
   items: { name: string; rate: number; quantity: number; price: number }[];
+  total: number;
 }
