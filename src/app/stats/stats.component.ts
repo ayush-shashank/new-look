@@ -25,7 +25,7 @@ export class StatsComponent implements OnInit {
     console.log('SD', this.startDate);
     console.log('ED', this.endDate);
     this.ds.getOrders(this.startDate, this.endDate).subscribe((res) => {
-      let data = res.docs.map((order: any) => order.data());
+      const data = res.docs.map((order: any) => order.data());
       console.log('data', data);
       this.orders = data;
       this.orders.forEach((order: any) => {

@@ -8,7 +8,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  invoiceNo: number = -1;
+  invoiceNo = -1;
   inventory: any[] = [];
   name = '';
   customer = '';
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.curItem = this.inventory.filter((item) => item.name === this.name)[0];
     // console.log(this.curItem);
     if (!this.curItem) {
-      let rate = prompt(
+      const rate = prompt(
         'Item not present in inventory. Enter rate of the item to add it to the list:'
       );
       console.log(rate, +rate!);
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
     this.items.splice(index, 1);
   }
 
-  onSave() {
+  onSave(): void {
     console.log(this.items);
     console.log('Cust name', this.customer);
     this.ds.generateBill(this.customer, this.items, this.totalPrice);

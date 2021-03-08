@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Order } from './order';
 
@@ -40,7 +41,7 @@ export class DataService {
     );
   }
 
-  getLastInvoice() {
+  getLastInvoice(): Subscription {
     return this.globalCollection
       .doc('invoice')
       .valueChanges()
@@ -50,12 +51,12 @@ export class DataService {
       });
   }
 
-  getStore() {
+  getStore(): void {
     this.globalCollection
       .doc('store')
       .get()
       .subscribe((doc) => {
-        let data: any = doc.data();
+        const data: any = doc.data();
         this.store.gstin = data.gstin;
         this.store.address = data.address;
         this.store.name = data.name;
@@ -63,7 +64,7 @@ export class DataService {
   }
 
   getOrders(startDate: Date, endDate: Date) {
-    let ordersCollection = this.db.collection('orders', (ref) =>
+    const ordersCollection = this.db.collection('orders', (ref) =>
       ref
         .where('date', '>=', new Date(startDate))
         .where('date', '<=', new Date(endDate))
@@ -72,12 +73,12 @@ export class DataService {
     return ordersCollection.get();
   }
 
-  generateBill(customer: string, items: any[], totalAmount: number) {
+  generateBill(customerName: string, items: any[], totalAmount: number): void {
     // let global = await this.globalCollection.valueChanges().toPromise();
     console.log('li', this.lastInvoice);
     this.newOrder = {
       invoiceNo: ++this.lastInvoice,
-      customer: customer,
+      customer: customerName,
       date: new Date(),
       items: items.reverse(),
       total: totalAmount,
