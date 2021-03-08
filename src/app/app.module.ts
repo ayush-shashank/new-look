@@ -10,9 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { BillPageComponent } from './bill-page/bill-page.component';
 import { ShowPricePipe } from './show-price.pipe';
 import { DatePipe } from './date.pipe';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, BillPageComponent, ShowPricePipe, DatePipe],
+  declarations: [AppComponent, HomeComponent, BillPageComponent, ShowPricePipe, DatePipe, StatsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

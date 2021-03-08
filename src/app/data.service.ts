@@ -17,6 +17,7 @@ export class DataService {
     items: [],
     total: 0,
   };
+  orders: any;
   inventoryCollection = this.db.collection('items');
   ordersCollection = this.db.collection('orders');
   globalCollection = this.db.collection('global');
@@ -61,12 +62,22 @@ export class DataService {
       });
   }
 
-  generateBill(items: any[], totalAmount: number) {
+  getOrders(startDate: Date, endDate: Date) {
+    let ordersCollection = this.db.collection('orders', (ref) =>
+      ref
+        .where('date', '>=', new Date(startDate))
+        .where('date', '<=', new Date(endDate))
+        .orderBy('date')
+    );
+    return ordersCollection.get();
+  }
+
+  generateBill(customer: string, items: any[], totalAmount: number) {
     // let global = await this.globalCollection.valueChanges().toPromise();
     console.log('li', this.lastInvoice);
     this.newOrder = {
       invoiceNo: ++this.lastInvoice,
-      customer: this.store.name,
+      customer: customer,
       date: new Date(),
       items: items.reverse(),
       total: totalAmount,

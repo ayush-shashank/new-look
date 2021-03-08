@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
   onSave() {
     console.log(this.items);
     console.log('Cust name', this.customer);
-    this.ds.generateBill(this.items, this.totalPrice);
+    this.ds.generateBill(this.customer, this.items, this.totalPrice);
     this.router.navigate(['bill']);
   }
 

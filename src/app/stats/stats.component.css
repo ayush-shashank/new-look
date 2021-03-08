@@ -146,3 +146,30 @@ button {
   letter-spacing: 1px;
   color: #999;
 }
+table,
+th,
+td {
+  border: solid black 2px;
+  padding: 5px;
+  font-family: monospace;
+}
+
+tbody td {
+  border-top: none;
+  border-bottom: none;
+}
+@media print {
+  header,
+  form {
+    display: none;
+  }
+  .content {
+    display: contents;
+  }
+  table {
+    display: table !important;
+  }
+  tr {
+    display: table-row;
+  }
+}
